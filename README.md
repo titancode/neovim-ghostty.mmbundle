@@ -20,11 +20,9 @@ To install the bundle:
 
 To remove the bundle:
 
-1. Delete the bundle from  
-   `~/Library/Application Support/MailMate/Bundles/`
+1. Delete the bundle from `~/Library/Application Support/MailMate/Bundles/`
 2. Quit MailMate.
-3. Delete the following files from  
-   `~/Library/Caches/com.freron.MailMate/`:
+3. Delete the following files from `~/Library/Caches/com.freron.MailMate/`:
    - `BundlesIndex.binary`
    - `Cache.db`
    - `Cache.db-shm`
