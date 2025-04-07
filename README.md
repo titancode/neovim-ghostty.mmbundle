@@ -58,7 +58,7 @@ This opens the current draft or reply in Neovim inside Ghostty.
 
 ## Notes
 
-This bundle attempts to locate nvim using the PATH environment variable. If not found, it falls back to the default Homebrew installation path: /opt/homebrew/bin/nvim for Apple Silicon Macs and /usr/local/bin/nvim for Intel Macs. If Neovim is installed elsewhere, please update the path in the script manually.
+This bundle attempts to locate nvim using the PATH environment variable. If not found, it falls back to the default Homebrew installation path: `/opt/homebrew/bin/nvim` for Apple Silicon Macs and `/usr/local/bin/nvim` for Intel Macs. If Neovim is installed elsewhere, please update the path in the script manually.
 
 If you installed Neovim elsewhere, either:
 
