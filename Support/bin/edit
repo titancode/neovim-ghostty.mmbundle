@@ -5,12 +5,19 @@ file="$MM_EDIT_FILEPATH"
 # Try to locate Neovim in PATH
 nvim_path=$(command -v nvim)
 
-# If not found, fall back to a common installation path (Homebrew on Apple Silicon)
-[[ -z "$nvim_path" ]] && nvim_path="/opt/homebrew/bin/nvim"
+# If not found, determine Mac architecture and use a fallback path
+if [[ -z "$nvim_path" ]]; then
+  arch=$(uname -m)
+  if [[ "$arch" == "arm64" ]]; then
+    nvim_path="/opt/homebrew/bin/nvim"  # Apple Silicon
+  else
+    nvim_path="/usr/local/bin/nvim"     # Intel
+  fi
+fi
 
-# If still not found, show error message and exit
+# Final check to make sure the path is valid
 if [[ ! -x "$nvim_path" ]]; then
-  echo "⚠️ Neovim not found. Please make sure it is installed or manually update the nvim path in this script." >&2
+  echo "⚠️  Neovim not found. Please make sure it is installed or manually update the nvim path in this script." >&2
   exit 1
 fi
 
