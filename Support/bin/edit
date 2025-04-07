@@ -14,5 +14,9 @@ if [[ ! -x "$nvim_path" ]]; then
   exit 1
 fi
 
-# Open Neovim in Ghostty
-/usr/bin/open -na "Ghostty" --args -e "$nvim_path" "$file"
+# Escape the file path to be safe in shell string
+escaped_file=$(printf %q "$file")
+escaped_nvim=$(printf %q "$nvim_path")
+
+# Open Neovim in Ghostty via shell
+/usr/bin/open -na "Ghostty" --args -e "zsh -c '$escaped_nvim $escaped_file'"
