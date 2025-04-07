@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+file="$MM_EDIT_FILEPATH"
+
+# Try to locate Neovim in PATH
+nvim_path=$(command -v nvim)
+
+# If not found, fall back to a common installation path (Homebrew on Apple Silicon)
+[[ -z "$nvim_path" ]] && nvim_path="/opt/homebrew/bin/nvim"
+
+# If still not found, show error message and exit
+if [[ ! -x "$nvim_path" ]]; then
+  echo "⚠️ Neovim not found. Please make sure it is installed or manually update the nvim path in this script." >&2
+  exit 1
+fi
+
+# Open Neovim in Ghostty
+/usr/bin/open -na "Ghostty" --args -e "$nvim_path" "$file"

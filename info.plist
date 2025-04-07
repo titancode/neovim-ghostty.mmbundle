@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>Neovim (in Ghostty)</string>
+    <key>uuid</key>
+    <string>D27E0DD6-5D31-4EEF-BA91-CB8C4D17F131</string>
+    <key>description</key>
+    <string>Use Neovim in Ghostty to edit messages</string>
+    <key>contactName</key>
+    <string>Yuan-Ping Wu</string>
+    <key>contactEmailRot13</key>
+    <string>uv@lcjh.bet</string>
+</dict>
+</plist>
