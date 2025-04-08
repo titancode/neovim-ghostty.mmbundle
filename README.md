@@ -1,4 +1,4 @@
-# Neovim in Ghostty for MailMate
+# Neovim (in Ghostty) MailMate Bundle
 
 A MailMate bundle that lets you edit email drafts in Neovim, launched inside [Ghostty](https://ghostty.org).
 
@@ -8,13 +8,12 @@ It adds a command to MailMate’s “Commands” menu that opens the message you
 
 ## Installation
 
-If you downloaded the bundle as a ZIP file from GitHub, please rename the extracted folder from `neovim-ghostty.mmbundle-main` to `neovim-ghostty.mmBundle` before moving it to the Bundles directory.
-
 To install the bundle:
 
-1. Move the folder `neovim-ghostty.mmBundle` to `~/Library/Application Support/MailMate/Bundles`
-2. Restart MailMate
-3. After the restart, you should see a new option under the `Commands` menu: `Neovim (in Ghostty) > Edit`
+1. Go to the [Releases page](https://github.com/titancode/neovim-ghostty.mmbundle/releases) and download the `neovim-ghostty.mmBundle.zip` file.
+2. Unzip the file to get a folder named `neovim-ghostty.mmBundle`.
+3. Move the `neovim-ghostty.mmBundle` folder to the MailMate Bundles directory: `~/Library/Application Support/MailMate/Bundles/`.
+4. Restart MailMate. You should now see a new option under the `Commands` menu: `Neovim (in Ghostty) > Edit`.
 
 ### Uninstalling
 

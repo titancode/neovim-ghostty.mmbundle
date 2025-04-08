@@ -1,7 +1,7 @@
 {
-name = "Edit";
-uuid = "00FEF604-17F7-493B-8166-FA39D46A025C";
-keyEquivalent = "^O";
-saveForEditing = 1;
-command = "#!/bin/zsh\n\"$MM_BUNDLE_SUPPORT/bin/edit\"";
+    name = "Edit";
+    uuid = "00FEF604-17F7-493B-8166-FA39D46A025C";
+    keyEquivalent = "^O";
+    saveForEditing = 1;
+    command = "#!/bin/zsh\n\"$MM_BUNDLE_SUPPORT/bin/edit\"";
 }
