@@ -1,29 +1,30 @@
 #!/bin/zsh
 
-file="$MM_EDIT_FILEPATH"
+# Fix $PATH for GUI context
+# Add common binary paths that might not be included in GUI app environment
+export PATH="$PATH:/usr/local/bin:/opt/homebrew/bin:$HOME/bin"
 
-# Try to locate Neovim in PATH
-nvim_path=$(command -v nvim)
-
-# If not found, determine Mac architecture and use a fallback path
-if [[ -z "$nvim_path" ]]; then
-  arch=$(uname -m)
-  if [[ "$arch" == "arm64" ]]; then
-    nvim_path="/opt/homebrew/bin/nvim"  # Apple Silicon
-  else
-    nvim_path="/usr/local/bin/nvim"     # Intel
-  fi
+# Now that PATH is extended, check if brew is available
+if command -v brew >/dev/null 2>&1; then
+  # If brew is now found, use its prefix to ensure we have the correct path
+  HOMEBREW_PREFIX=$(brew --prefix)
+  export PATH="$PATH:$HOMEBREW_PREFIX/bin"
 fi
 
-# Final check to make sure the path is valid
-if [[ ! -x "$nvim_path" ]]; then
-  echo "⚠️  Neovim not found. Please make sure it is installed or manually update the nvim path in this script." >&2
+file="$MM_EDIT_FILEPATH"
+
+# Locate Neovim in PATH
+nvim_executable=$(command -v nvim)
+
+# Exit if not found
+if [[ -z "$nvim_executable" ]]; then
+  echo "⚠️  Neovim not found. Please make sure it is installed and available in your \$PATH." >&2
   exit 1
 fi
 
-# Escape the file path to be safe in shell string
+# Escape paths to be safe
 escaped_file=$(printf %q "$file")
-escaped_nvim=$(printf %q "$nvim_path")
+escaped_nvim=$(printf %q "$nvim_executable")
 
-# Open Neovim in Ghostty via shell
+# Launch Neovim in Ghostty via shell
 /usr/bin/open -na "Ghostty" --args -e "zsh -c '$escaped_nvim $escaped_file'"

@@ -57,14 +57,26 @@ This opens the current draft or reply in Neovim inside Ghostty.
 
 ## Notes
 
-This bundle attempts to locate nvim using the PATH environment variable. If not found, it falls back to the default Homebrew installation path: `/opt/homebrew/bin/nvim` for Apple Silicon Macs and `/usr/local/bin/nvim` for Intel Macs. If Neovim is installed elsewhere, please update the path in the script manually.
+This bundle uses a shell script (`Support/bin/edit`) to launch Neovim inside Ghostty.  
+The script locates the `nvim` executable using the `PATH` environment variable.
 
-If you installed Neovim elsewhere, either:
+On macOS, GUI applications like MailMate do not normally inherit your full shell environment. To work around this, the script manually appends common binary paths to `PATH` at runtime:
 
-- Add its location to your `PATH`, or
-- Edit `Support/bin/edit` to set the correct path manually.
+- `/usr/local/bin` (Homebrew on Intel Macs)
+- `/opt/homebrew/bin` (Homebrew on Apple Silicon Macs)
+- `$HOME/bin` (for manual installs)
 
-Also make sure `Ghostty` is installed and accessible via `/usr/bin/open -na "Ghostty"`.
+If the `brew` command is available, the script also adds `$(brew --prefix)/bin` to `PATH`.  
+This ensures compatibility with non-default Homebrew installations that may use a custom prefix.
+
+If `nvim` is installed in a different location that isn’t covered by these, the script will not find it and will exit with an error.
+
+In that case, you can either:
+
+- Add the appropriate path to your `PATH` environment variable, or
+- Modify `Support/bin/edit` to manually set the `nvim` path
+
+Also make sure Ghostty is installed and accessible via `/usr/bin/open -na "Ghostty"`.
 
 Finally, since Ghostty doesn’t support direct CLI launching on macOS, this bundle uses macOS’s `open -na "Ghostty"` command to launch it with arguments.[^1]
 
