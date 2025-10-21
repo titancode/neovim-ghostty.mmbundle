@@ -1,30 +1,26 @@
 #!/bin/zsh
 
 # Fix $PATH for GUI context
-# Add common binary paths that might not be included in GUI app environment
 export PATH="$PATH:/usr/local/bin:/opt/homebrew/bin:$HOME/bin"
-
-# Now that PATH is extended, check if brew is available
 if command -v brew >/dev/null 2>&1; then
-  # If brew is now found, use its prefix to ensure we have the correct path
   HOMEBREW_PREFIX=$(brew --prefix)
   export PATH="$PATH:$HOMEBREW_PREFIX/bin"
 fi
 
 file="$MM_EDIT_FILEPATH"
-
-# Locate Neovim in PATH
 nvim_executable=$(command -v nvim)
-
-# Exit if not found
 if [[ -z "$nvim_executable" ]]; then
   echo "⚠️  Neovim not found. Please make sure it is installed and available in your \$PATH." >&2
   exit 1
 fi
 
-# Escape paths to be safe
-escaped_file=$(printf %q "$file")
-escaped_nvim=$(printf %q "$nvim_executable")
+# Create a temporary shell script
+tmp_script="$(mktemp -t mailmate-ghostty-nvim)"
+cat >"$tmp_script" <<EOF
+#!/bin/zsh
+"$nvim_executable" -- "$file"
+rm -f -- "\$0"
+EOF
+chmod +x "$tmp_script"
 
-# Launch Neovim in Ghostty via shell
-/usr/bin/open -na "Ghostty" --args -e "zsh -c '$escaped_nvim $escaped_file'"
+/usr/bin/open -n -F -a "Ghostty" --args -e "$tmp_script"

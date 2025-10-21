@@ -78,6 +78,10 @@ In that case, you can either:
 
 Also make sure Ghostty is installed and accessible via `/usr/bin/open -na "Ghostty"`.
 
-Finally, since Ghostty doesn’t support direct CLI launching on macOS, this bundle uses macOS’s `open -na "Ghostty"` command to launch it with arguments.[^1]
+### About Ghostty 1.2.0 and Later
 
-[^1]: I learned this from [this discussion.](https://github.com/ghostty-org/ghostty/discussions/3698)
+Starting with [Ghostty 1.2.0](https://ghostty.org/docs/install/release-notes/1-2-0), commands launched through the `-e` flag are executed directly rather than being wrapped with `/bin/sh`. This update changes how command arguments are processed internally and slightly adjusts how terminal commands are invoked on macOS.
+
+To accommodate this change, this bundle now uses a small, short-lived wrapper script created in the system’s temporary directory. The wrapper launches Neovim with the correct file path and deletes itself once Neovim exits.
+
+This approach ensures that Neovim always launches reliably inside Ghostty on Ghostty 1.2.0 and later, while maintaining compatibility with earlier versions.
